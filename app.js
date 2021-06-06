@@ -1,13 +1,13 @@
   //Firebase configuration
 var firebaseConfig = {
-apiKey: "AIzaSyBaVh0h6ZKPE-Dr5T1MvmFcOE5ANxdSGeE",
-  authDomain: "hashjprogramming.firebaseapp.com",
-  databaseURL: "https://hashjprogramming-default-rtdb.firebaseio.com",
-  projectId: "hashjprogramming",
-  storageBucket: "hashjprogramming.appspot.com",
-  messagingSenderId: "79061656510",
-  appId: "1:79061656510:web:b1cc14af111d5e2e2b0fef",
-  measurementId: "G-8J81F30M7L"
+apiKey: "",
+  authDomain: "",
+  databaseURL: "",
+  projectId: "",
+  storageBucket: "",
+  messagingSenderId: "",
+  appId: "",
+  measurementId: ""
 };
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
