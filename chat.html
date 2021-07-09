@@ -1,0 +1,56 @@
+<!doctype html>
+<html>
+  <head>
+    <script src="https://www.gstatic.com/firebasejs/4.8.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/4.8.1/firebase-database.js"></script>
+    <script>
+      // Initialize Firebase
+      var config = {
+        apiKey: "AIzaSyBaVh0h6ZKPE-Dr5T1MvmFcOE5ANxdSGeE",
+        authDomain: "hashjprogramming.firebaseapp.com",
+        databaseURL: "https://hashjprogramming-default-rtdb.firebaseio.com",
+        projectId: "hashjprogramming",
+        storageBucket: "hashjprogramming.appspot.com",
+        messagingSenderId: "79061656510",
+        appId: "1:79061656510:web:b1cc14af111d5e2e2b0fef",
+        measurementId: "G-8J81F30M7L"
+      };
+      firebase.initializeApp(config);
+    </script>
+    <script src='https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js'></script>
+    <link rel='stylesheet' type='text/css' href='/resources/tutorial/css/example.css'>
+  </head>
+  <body>
+    <div id='messagesDiv'></div>
+    <input type='text' id='nameInput' placeholder='Name'>
+    <input type='text' id='messageInput' placeholder='Message, press enter to submit'>
+    <a href="https://codepen.io/deehidayat/pen/GJbxwP" target="_blank">Open this page on another Window</a>
+    <script>      
+      var myDataRef = firebase.database().ref('chat');
+      $('#messageInput').keypress(function (e) {
+        if (e.keyCode == 13) {
+          var name = $('#nameInput').val();
+          var text = $('#messageInput').val();
+          // myDataRef.push({name: name, text: text});
+          myDataRef.push({
+              name: name,
+              text: text
+          });
+          $('#messageInput').val('');
+        }
+      });
+      myDataRef.on('child_added', function(snapshot) {
+        var message = snapshot.val();
+        displayChatMessage(message.name, message.text);
+      });
+      myDataRef.on('child_removed', function(snapshot) {
+        var deletedPost = snapshot.val();
+        console.log("Chat was removed", deletedPost);
+      });
+      function displayChatMessage(name, text) {
+        $('<div/>').text(text).prepend($('<em/>').text(name+': ')).appendTo($('#messagesDiv'));
+        $('#messagesDiv')[0].scrollTop = $('#messagesDiv')[0].scrollHeight;
+      };
+    </script>
+  </body>
+</html>
